@@ -1,0 +1,201 @@
+table {
+  width: 100%;
+}
+
+input {
+  border: none;
+}
+
+.search {
+  top: 8px;
+  right: 10px;
+}
+
+.actionbtn {
+  background: transparent;
+  outline: none;
+  border: none;
+  color: black;
+}
+
+.cards .card {
+  padding: 10px 20px;
+  height: 155px;
+  display: flex;
+  justify-content: center;
+}
+
+.main label {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.main select {
+  width: 35%;
+  border-radius: 5px;
+  border: navajowhite;
+  padding: 8px 10px
+}
+
+.cardlable {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.card h3 {
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+.fa-filter:hover{
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 50%;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dropdowncontent {
+  background: white;
+  border-radius: 6px;
+  padding: 10px;
+  height: 120px;
+  overflow: auto;
+  position: absolute;
+  border: 1px solid lightgray;
+  margin-left: 86px;
+  width: 150px;
+}
+
+.dropdowncontent li {
+  line-height: 2;
+}
+
+::ng-deep .client-select1 .mat-select-value-text {
+  display: none !important;
+}
+
+::ng-deep .client-select1 .mat-select-arrow-wrapper {
+  display: inline-block !important;
+  margin-left: -17px !important;
+  margin-top: -8px !important;
+  visibility: hidden;
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix {
+  width: 0px;
+}
+
+.dateselect {
+  position: relative;
+  bottom: 28px;
+  right: 49px;
+  height: 2em;
+}
+
+.dateVisibility {
+  visibility: hidden;
+}
+
+.inputCard {
+  padding: 8px;
+  border-radius: 5px;
+  width: 200px;
+  margin-right: 0px;
+}
+
+.searchIcon {
+  cursor: pointer;
+  font-size: 18px;
+  color: #ff9800;
+  position: absolute;
+  right: 36px;
+}
+
+:host::ng-deep.mat-datepicker-toggle-default-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.fa-filter {
+  font-size: 14px;
+}
+
+.technology .fa-filter {
+  font-size: 20px;
+}
+
+.content {
+  position: absolute;
+  bottom: 20px;
+  right: 28px;
+  font-size: 14px;
+}
+
+.dateSelection {
+  text-decoration: underline;
+}
+
+.modal-confirm{
+  color: #636363;
+}
+.modal-confirm .modal-content{
+  padding: 20px;
+  border-radius: 5px;
+  border:none;
+  text-align: center;
+  font-size: 14px;
+}
+.modal-confirm .modal-header{
+  border-bottom: none;
+  position: relative;
+}
+.modal-confirm h4{
+  text-align: center;
+  font-size: 26px;
+  margin:30px 0px -10px;
+}
+.modal-confirm .modelCloseBtn{
+  position: absolute;
+  top: -5px;
+  right: -2px;
+}
+.modal-confirm .modal-body{
+  color: #999;
+}
+.modal-confirm .icon-box{
+  width: 80px;
+  height: 80px;
+  margin: 25px auto 0px;
+  border-radius: 50%;
+  z-index: 9;
+  text-align: center;
+  border: 3px solid #f15e5e;
+}
+.modal-confirm .icon-box i{
+  font-size: 46px;
+  color: #f15e5e;
+  display: inline-block;
+  margin: 13px 0px 0px;
+}
+.modelSaveBtn{
+  background-color: #146389;
+  color: white;
+  padding: 8px 15px;
+}
+
+
+.tablebtn{
+  background-color: #ff9800;
+  margin: 0px 10px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    outline: none;
+    border-radius: 20px;
+}

@@ -1,0 +1,89 @@
+<div class="container-fluid">
+  <h1>Angular + Nodejs Assignment</h1>
+  <div class="d-flex">
+    <button class="btn tablebtn" (click)="openDialog()">Add</button>
+  </div>
+
+  <div class="mt-4 mb-5 w-100 overflow-auto table-box">
+    <table mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef > Id </th>
+        <td mat-cell *matCellDef="let element" > {{element.id}} </td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="userId" class="d-none">
+        <th mat-header-cell *matHeaderCellDef class="d-none"> UserId
+        </th>
+        <td mat-cell *matCellDef="let element" class="d-none">
+          {{element.userId}}
+        </td>
+      </ng-container> -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> Title
+        </th>
+        <td mat-cell *matCellDef="let element"
+          style="cursor: pointer;color: darkblue;">
+          {{element.title}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="body">
+        <th mat-header-cell *matHeaderCellDef>Body</th>
+        <td mat-cell *matCellDef="let element">
+          {{element.body}}
+        </td>
+      </ng-container>
+
+
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element" style="width: 10%;">
+          <span class="d-flex">
+            <button class="actionbtn" matTooltip="Edit" (click)="editDialog(element)" ><i class="fa fa-pencil-square-o" style="color:#146389" aria-hidden="true"></i></button>
+       <button class="actionbtn delete" data-bs-toggle="modal" data-bs-target="#staticBackdrop"  (click)="getUserDataToDelete(element)"><i class="fa fa-trash text-danger"
+        matTooltip="Delete User" aria-hidden="true"></i></button>
+          </span>
+        </td>
+
+      </ng-container>
+
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell text-center" colspan="14">No data available</td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons
+      (page)="onPageChange($event)"></mat-paginator>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdrop" aria-hidden="true">
+  <div class="modal-dialog modal-confirm modal-dialog-centered">
+    <div class="modal-content deleteModel">
+      <div class="modal-header flex-column">
+        <div class="icon-box">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </div>
+        <h4 class="modal-title w-100">Are you sure to delete
+          <span style="color:red">
+          </span>
+            record?</h4>
+        <button type="button" class="btn-close modelCloseBtn" data-bs-dismiss="modal" aria-label="Close" ></button>
+      </div>
+      <div class="modal-body text-center">
+        <p class="modelDeleteMsg"> Do you realy want to delete? This process cannot be undone </p>
+      </div>
+      <div class="m-auto mb-4">
+        <button type="button" class="btn modelSaveBtn"  (click)="deleteUser()" data-bs-dismiss="modal">Delete</button>
+      </div>
+
+    </div>
+  </div>
+  </div>

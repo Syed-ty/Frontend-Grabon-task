@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { ResourceService } from '../../resource.service';
 
 @Component({
   selector: 'app-client-view',
@@ -14,7 +15,10 @@ export class ClientViewComponent implements OnInit {
   inputEmpId:any;
   inputValueNo:boolean=false;
   constructor(
-    private dialogRef: MatDialogRef<ClientViewComponent>,) {
+    private dialogRef: MatDialogRef<ClientViewComponent>,
+    private service :ResourceService,
+    private toaster:ToastrService
+    ) {
     this.userForm=new FormGroup({
       id:new FormControl(''),
       userId:new FormControl(''),
@@ -24,40 +28,29 @@ export class ClientViewComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    // this.getUser();
   }
 
   userDetails:any
-  // getUser() {
-  //   this.userservice.getUser().subscribe((res) => {
-  //     if (res) {
-  //       this.userDetails = res.userData;
-  //     }
-  //   })
-  // }
 
+  initialValue:any
   onSubmit(){
-    this.userForm.get('id')?.setValue(1)
+    this.userForm.get('id')?.setValue(100)
     this.userForm.get('userId')?.setValue(11)
-    console.log(this.userForm.value)
-    // this.spinner=true
-    // this.userservice.addUser(this.userForm.value).subscribe((res)=>{
-    //    if (!res.error) {
-    //     this.spinner=false
-    //     this.toastr.success(res.message);
-    //     this.userForm.reset();
-    //     this.getUser();
-    //     this.dialogRef.close('add');
-    //   } else {
-    //     this.toastr.error(res.message);
-    //   }
-    // }, (err) => {
-    //   if (err.status) {
-    //     this.toastr.error(err.error.message);
-    //   } else {
-    //     this.toastr.error('CONNECTION_ERROR');
-    //   }
-    // })
+    this.service.addApi(this.userForm.value).subscribe((res)=>{
+       if (!res.err) {
+        this.toaster.success(res.message);
+        this.userForm.reset();
+        this.dialogRef.close('add');
+      } else {
+        this.toaster.error(res.message);
+      }
+    }, (err) => {
+      if (err.status) {
+        this.toaster.error(err.error.message);
+      } else {
+        this.toaster.error('CONNECTION_ERROR');
+      }
+    })
   }
   cancel() {
     this.dialogRef.close();

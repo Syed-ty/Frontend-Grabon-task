@@ -9,6 +9,7 @@ import { CurrencyPipe } from '@angular/common';
 import { SharedService } from '../shared/shared.service';
 import { EditResourceComponent } from '../modules/edit-resource/edit-resource.component';
 import { ClientViewComponent } from '../modules/client-view/client-view.component';
+import { ToastrService } from 'ngx-toastr';
 const ELEMENT_DATA: any[] = [];
 
 
@@ -19,7 +20,7 @@ const ELEMENT_DATA: any[] = [];
 })
 export class RequirementsComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'title', 'body','action'];
+  displayedColumns: string[] = ['id','userId', 'title', 'body','action'];
 
 
 
@@ -47,7 +48,9 @@ export class RequirementsComponent implements OnInit {
      private service: ResourceService,
       private router: Router,
       public dialogss: MatDialog,
-       private sharedService: SharedService) {
+       private sharedService: SharedService,
+       private toaster :ToastrService
+       ) {
     this.dataSource = new MatTableDataSource(ELEMENT_DATA);
   }
 
@@ -61,9 +64,9 @@ export class RequirementsComponent implements OnInit {
 
 
   getData() {
-    this.service.getResourceInformation().subscribe({
+    this.service.getApi().subscribe({
       next: (res: any) => {
-        this.ArrayResponse = res
+        this.ArrayResponse = res.response
         this.dataSource = new MatTableDataSource([...this.ArrayResponse]);
         this.dataSource.paginator = this.paginator;
       },
@@ -86,7 +89,6 @@ export class RequirementsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result:any) => {
       if (result === 'update') {
-
         this.getData();
         this.spinner=false;
       }
@@ -97,27 +99,22 @@ export class RequirementsComponent implements OnInit {
   deleteId:any
   getUserDataToDelete(data: any) {
     this.deleteData = data;
-    console.log(this.deleteData);
-
     this.deleteId = data.id;
   }
 
 
   deleteUser(){
-    // this.userservice.deleteUser(this.deleteId).subscribe(res => {
-    //   if (!res.error) {
-    //     this.toaster.success(res.message);
-    //     this.getUserPaginator(this.paginate)
-    //   } else {
-    //     this.toaster.error(res.message);
-    //   }
-    // })
-    // this.responseData.forEach((ele:any, i:any) => {
-    //   if (ele._id === this.deleteId) {
-    //     this.responseData.splice(i, 1);
-    //   }
-    // })
-    // this.getUserPaginator(this.paginate)
+    let obj = {
+      "id":this.deleteId
+    }
+    this.service.deleteApi(obj).subscribe(res => {
+      if (!res.error) {
+        this.toaster.success(res.message);
+        this.getData()
+      } else {
+        this.toaster.error(res.message);
+      }
+    })
   }
 
 

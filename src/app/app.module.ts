@@ -9,7 +9,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { registerLocaleData } from '@angular/common';
 import localeEnIN from '@angular/common/locales/en-IN';
-import { TOAST_CONFIG, ToastrService } from 'ngx-toastr';
+import { TOAST_CONFIG, ToastrModule, ToastrService } from 'ngx-toastr';
 
 registerLocaleData(localeEnIN, 'en-IN');
 @NgModule({
@@ -21,22 +21,21 @@ registerLocaleData(localeEnIN, 'en-IN');
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ToastrModule.forRoot({
+      maxOpened: 1,
+      timeOut: 3000,
+      preventDuplicates: true,
+    }),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+
   ],
   providers: [
     ToastrService,
-    {
-      provide: TOAST_CONFIG,
-      useValue: {
-        position: 'top-right',
-        duration: 3000,
-      },
-    },
       { provide: LOCALE_ID, useValue: 'en-IN' },
   ],
   bootstrap: [AppComponent],

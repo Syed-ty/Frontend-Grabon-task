@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-// import { ToastrService } from 'ngx-toastr';
+import { ResourceService } from '../../resource.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-resource',
@@ -13,6 +14,8 @@ export class EditResourceComponent implements OnInit {
   spinner:boolean=false
   constructor(private fb: FormBuilder,
    @Inject(MAT_DIALOG_DATA) public editData: any,
+   private toast:ToastrService,
+   private service :ResourceService,
     private dialogRef: MatDialogRef<EditResourceComponent>,
     ) {
       this.userForm=new FormGroup({
@@ -45,22 +48,22 @@ export class EditResourceComponent implements OnInit {
   onSubmit(){
     console.log(this.userForm.value)
   //   this.spinner=true
-  //  this.userservice.editUser(this.userForm.value,this.editData._id).subscribe((res)=>{
-  //   if (!res.error) {
-  //     this.spinner=false
-  //     this.toast.success(res.message);
-  //     this.userForm.reset();
-  //     this.dialogRef.close('update');
-  //   } else {
-  //     this.toast.error(res.message);
-  //   }
-  // }, err => {
-  //   if (err.status) {
-  //     this.toast.error(err.error.message);
-  //   } else {
-  //     this.toast.error("CONNECTION_ERROR");
-  //   }
-  // });
+   this.service.EditApi(this.editData.id,this.userForm.value).subscribe((res)=>{
+    if (!res.error) {
+      this.spinner=false
+      this.toast.success(res.message);
+      this.userForm.reset();
+      this.dialogRef.close('update');
+    } else {
+      // this.toast.error(res.message);
+    }
+  }, err => {
+    if (err.status) {
+      // this.toast.error(err.error.message);
+    } else {
+      // this.toast.error("CONNECTION_ERROR");
+    }
+  });
 }
 cancel(){
   this.dialogRef.close();

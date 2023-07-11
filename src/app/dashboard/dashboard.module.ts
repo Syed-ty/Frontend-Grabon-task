@@ -8,8 +8,6 @@ import { SharedModule } from '../shared.module';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { Router } from '@angular/router';
 import { RequirementsComponent } from './requirements/requirements.component';
-import { EditResourceComponent } from './modules/edit-resource/edit-resource.component';
-import { ClientViewComponent } from './modules/client-view/client-view.component';
 import { NgChartsModule } from 'ng2-charts';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { CurrencyPipe } from '@angular/common';
@@ -19,8 +17,6 @@ import { CurrencyPipe } from '@angular/common';
     NavbarComponent,
     SidenavComponent,
     RequirementsComponent,
-    EditResourceComponent,
-    ClientViewComponent,
     SpinnerComponent
   ],
   imports: [

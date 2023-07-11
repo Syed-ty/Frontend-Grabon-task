@@ -7,16 +7,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./sidenav.component.css']
 })
 export class SidenavComponent implements OnInit {
-  @Input() sideNavStatus:boolean=false
-  sideBarOpen:boolean=false
-  // @Output() sendChildValue: EventEmitter<boolean> = new EventEmitter<boolean>();
+  urls:any = [];
+  onSelectFile(event:any) {
+    if (event.target.files && event.target.files[0]) {
+        var filesAmount = event.target.files.length;
+        for (let i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
 
-    constructor(public router:Router,) {
+                reader.onload = (event:any) => {
+                  console.log(event.target.result);
+                   this.urls.push(event.target.result);
+                }
 
+                reader.readAsDataURL(event.target.files[i]);
+        }
     }
-
-    AdminView:Boolean = false;
-    ManagerView:Boolean = false
+  }
     ngOnInit(): void {
     }
 

@@ -1,92 +1,22 @@
-<div class="container-fluid">
-
-  <h1 class="text-center mt-4">Angular + Nodejs Assignment</h1>
-  <div class="d-flex justify-content-end">
-    <button class="btn tablebtn" (click)="openDialog()">
-      <i class="fa fa-plus" aria-hidden="true"></i>
-      Add</button>
-  </div>
-
-  <div class="mt-4 mb-5 w-100 overflow-auto table-box">
-    <table mat-table [dataSource]="dataSource">
-
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef > Id </th>
-        <td mat-cell *matCellDef="let element" > {{element.id}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="userId" >
-        <th mat-header-cell *matHeaderCellDef > UserId
-        </th>
-        <td mat-cell *matCellDef="let element" >
-          {{element.userId}}
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef> Title
-        </th>
-        <td mat-cell *matCellDef="let element"
-          style="cursor: pointer;color: darkblue;">
-          {{element.title}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="body">
-        <th mat-header-cell *matHeaderCellDef>Body</th>
-        <td mat-cell *matCellDef="let element">
-          {{element.body}}
-        </td>
-      </ng-container>
-
-
-
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef> Action </th>
-        <td mat-cell *matCellDef="let element" style="width: 10%;">
-          <span class="d-flex">
-            <button class="actionbtn" matTooltip="Edit" (click)="editDialog(element)" ><i class="fa fa-pencil-square-o" style="color:#146389" aria-hidden="true"></i></button>
-       <button class="actionbtn delete" data-bs-toggle="modal" data-bs-target="#staticBackdrop"  (click)="getUserDataToDelete(element)"><i class="fa fa-trash text-danger"
-        matTooltip="Delete" aria-hidden="true"></i></button>
-          </span>
-        </td>
-
-      </ng-container>
-
-
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell text-center" colspan="14">No data available</td>
-      </tr>
-    </table>
-
-    <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons
-      (page)="onPageChange($event)"></mat-paginator>
-  </div>
-</div>
-
-
-
-<div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdrop" aria-hidden="true">
-  <div class="modal-dialog modal-confirm modal-dialog-centered">
-    <div class="modal-content deleteModel">
-      <div class="modal-header flex-column">
-        <div class="icon-box">
-          <i class="fa fa-trash" aria-hidden="true"></i>
+<div class="main">
+  <div class="form">
+    <form [formGroup]="ScarpForm">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="Enter URL" formControlName="searchUrl">
+            </mat-form-field>
+          </div>
+         <div class="form-group text-center mt-3">
+          <!-- routerLink="/dashboard/screen2" -->
+          <button class="submit" (click)="onSubmit()"  routerLink="/dashboard/screen2" [disabled]="ScarpForm.invalid" >Scrap</button>
+         </div>
         </div>
-        <h4 class="modal-title w-100">Are you sure to delete
-          <span style="color:red">
-          </span>
-            record?</h4>
-        <button type="button" class="btn-close modelCloseBtn" data-bs-dismiss="modal" aria-label="Close" ></button>
       </div>
-      <div class="modal-body text-center">
-        <p class="modelDeleteMsg"> Do you realy want to delete? This process cannot be undone </p>
-      </div>
-      <div class="m-auto mb-4">
-        <button type="button" class="btn modelSaveBtn"  (click)="deleteUser()" data-bs-dismiss="modal">Delete</button>
-      </div>
-
     </div>
+    </form>
   </div>
-  </div>
+
+</div>

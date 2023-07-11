@@ -26,7 +26,7 @@ export class ResourceService {
       err: boolean,
       response:any,
       message:any;
-    }> (`${environment.baseUrl}/task/add`,datas)
+    }> (`${environment.baseUrl}/scrap/add-url`,datas)
   }
 
   EditApi(id:any,datas:any){
